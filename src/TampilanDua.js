@@ -2,6 +2,7 @@ import {Component} from "react";
 import 'semantic-ui-css/semantic.min.css';
 import axios from "axios";
 import { Button, Form, Grid, Header, Segment, Image, TextArea, Table, Input } from 'semantic-ui-react';
+// import ReactPaginate from 'react-paginate';
 
 class Tampilan extends Component{
   constructor(props){
@@ -15,22 +16,47 @@ class Tampilan extends Component{
             isi:'',
             tanggal:''
         },
-        mencari:''
+        mencari:'',
+        offset: 0,
+        perPage: 3,
+        currentPage: 0
     };
     this.handleRemove = this.handleRemove.bind(this);
     this.handleCari = this.handleCari.bind(this);
     this.inputChange = this.inputChange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
+    // this.handlePageClick = this.handlePageClick.bind(this);
 }
 handleCari(event) {
   this.setState({mencari: event.target.value});
 }
+// handlePageClick = (e) => {
+//   const selectedPage = e.selected;
+//   const offset = selectedPage * this.state.perPage;
+
+//   this.setState({
+//       currentPage: selectedPage,
+//       offset: offset
+//     }, () => {
+//       this.loadMoreData()
+//   });
+
+// };
+// loadMoreData() {
+//   const data = this.state.dataPost;
+//   const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+//   this.setState({
+//     pageCount: Math.ceil(data.length / this.state.perPage),
+//     dataApi:slice
+//   })
+
+// }
 reloadData(){
   axios.get("http://localhost:3004/data-catatan")
   .then(res =>{
       this.setState({
           dataApi:res.data,
-          edit: false
+          edit: false,
       })
   });
 }
@@ -41,7 +67,7 @@ inputChange(e){
       newdataPost['id']=new Date().getTime();
     }
     newdataPost[e.target.name]=e.target.value;
-    newdataPost['tanggal'] = date.toLocaleString('En-Us')
+    newdataPost['tanggal'] = date.toLocaleString('id')
     this.setState({
         dataPost: newdataPost
     }, () => console.log(this.state.dataPost))
@@ -69,9 +95,13 @@ getDataId = e =>{
     axios
     .get(`http://localhost:3004/data-catatan/${e.target.value}`)
     .then(res=>{
+      // var data = res.data;
+      // var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
         this.setState({
+            // pageCount: Math.ceil(data.length / this.state.perPage),
             dataPost:res.data,
             edit:true
+            // dataApi:slice
         })
     });
 }
@@ -138,8 +168,8 @@ componentDidMount(){
                         <Table.Cell>{dat.tanggal}</Table.Cell>
                         <Table.Cell>
                           <Button.Group>
-                            <Button value={dat.id} onClick={this.getDataId} color='red'>Edit</Button>
-                            <Button value={dat.id} onClick={this.handleRemove} color='orange'>Hapus</Button>
+                            <Button value={dat.id} onClick={this.getDataId} color='orange'>Edit</Button>
+                            <Button value={dat.id} onClick={this.handleRemove} color='red'>Hapus</Button>
                           </Button.Group>
                         </Table.Cell> 
                 
@@ -147,6 +177,22 @@ componentDidMount(){
             );
           })}
           </Table.Body>
+            {/* <Table.Footer>
+                <Table.Row>
+                  <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}/>
+                </Table.Row>
+            </Table.Footer> */}
           </Table>
       </div>
     )
