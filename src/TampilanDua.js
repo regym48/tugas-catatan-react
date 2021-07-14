@@ -19,16 +19,31 @@ class Tampilan extends Component{
         mencari:'',
         offset: 0,
         perPage: 3,
-        currentPage: 0
+        currentPage: 0,
+        show: false
     };
     this.handleRemove = this.handleRemove.bind(this);
     this.handleCari = this.handleCari.bind(this);
     this.inputChange = this.inputChange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.handleBatal = this.handleBatal.bind(this);
+    // this.handleshow = this.handleshow.bind(this);
     // this.handlePageClick = this.handlePageClick.bind(this);
 }
+// handleshow() {
+//   if(this.state.edit === true){
+//     this.setState({show: true});
+//   }else{
+//     this.setState({show: false});
+//   }
+// }
 handleCari(event) {
   this.setState({mencari: event.target.value});
+}
+handleBatal=()=> {
+  this.setState({edit: false, show:false});
+  this.reloadData();
+  this.clearData();
 }
 // handlePageClick = (e) => {
 //   const selectedPage = e.selected;
@@ -100,7 +115,8 @@ getDataId = e =>{
         this.setState({
             // pageCount: Math.ceil(data.length / this.state.perPage),
             dataPost:res.data,
-            edit:true
+            edit:true,
+            show:true
             // dataApi:slice
         })
     });
@@ -133,6 +149,9 @@ componentDidMount(){
                 <Button type="submit" onClick={this.onSubmitForm} color='teal' fluid size='large'>
                   Simpan
                 </Button>
+                { this.state.show ? <Button type="submit" onClick={this.handleBatal} color='brown' fluid size='large'>
+                  Batal Edit
+                </Button> : null }
               </Segment>
             </Form>
           </Grid.Column>

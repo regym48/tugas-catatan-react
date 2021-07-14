@@ -2,21 +2,39 @@
   "data-catatan": [
     {
       "id": 1,
-      "judul": "catatan pertamax",
-      "isi": "ini adalah isi catatan pertamax",
-      "tanggal": "7/8/2021, 3:22:23 PM"
-    },
-    {
-      "id": 1625646163137,
-      "judul": "catatan kedua",
-      "isi": "isi catatan kedua",
-      "tanggal": "7/8/2021, 3:24:44 PM"
+      "judul": "catatan pertama",
+      "isi": "ini adalah isi catatan pertama",
+      "tanggal": "12/7/2021 09.45.53"
     },
     {
       "id": 1625706759918,
       "judul": "catatan 3",
       "isi": "percobaan",
       "tanggal": "12/7/2021 09.00.09"
+    },
+    {
+      "id": 1626057924428,
+      "judul": "catatan 5",
+      "isi": "contoh isi catatan",
+      "tanggal": "12/7/2021 09.45.24"
+    },
+    {
+      "id": 1626058126099,
+      "judul": "CATATAn",
+      "isi": "",
+      "tanggal": "12/7/2021 09.48.46"
+    },
+    {
+      "id": 1626231493603,
+      "judul": "69",
+      "isi": "",
+      "tanggal": "14/7/2021 09.58.13"
+    },
+    {
+      "id": 1626235353733,
+      "judul": "70",
+      "isi": "",
+      "tanggal": "14/7/2021 11.02.33"
     }
   ]
 }
